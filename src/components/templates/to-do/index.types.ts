@@ -1,0 +1,3 @@
+interface ToDoProps {
+  date: string;
+}
