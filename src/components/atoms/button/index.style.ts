@@ -1,39 +1,33 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ButtonStyles } from "./index.types";
 
-const handleButtonIcon = (isIcon: boolean = false) => {
-  console.log('isIcon', isIcon)
-  if (isIcon) {
-    return css`
-      padding: 14px 12px;
-      width: 44px;
-    `
-  }
+const handlePadding = (size: ButtonStyles['size'], isIcon: boolean = false) => {
+  if (isIcon) return;
 
-  return css`
-    min-width: 64px;
-  `
+  if (size === 'large') return '--btn-padding: 14px 12px;'
+
+  return '--btn-padding: 8px 16px;'
 }
 
-const handleSize = (size: ButtonStyles['size']) => {
+const handleSize = (size: ButtonStyles['size'], isIcon: boolean = false) => {
+  if (isIcon) {
+    return '--btn-width: 44px;'
+  }
   if (size === 'large') {
-    return css`
-      padding: 14px 12px;
-      font-size: 1.25rem;
-    `
+    return '--btn-font-size: 1.25em;'
   }
 
-  return css`
-    padding: 8px 16px;
-    font-size: 1.16rem;
+  return `
+    --btn-min-width: 64px;
+    --btn-font-size: 1em;
   `
 }
 
 const handleToggle = (toggled: boolean = false) => {
   if (toggled) {
-    return css`
-      border-color: #4DA6B3;
-      color: #4DA6B3;
+    return `
+      --btn-border-color: #4DA6B3;
+      --btn-text-color: #4DA6B3;
     `
   }
 }
@@ -41,39 +35,55 @@ const handleToggle = (toggled: boolean = false) => {
 const handleVariant = (variant: ButtonStyles['variant']) => {
   switch (variant) {
     case 'primary':
-      return css`
-        background-color: #ffffff;
-        color: inherit;
+      return `
+        --btn-bg-color: #ffffff;
+        --btn-border-color: #DBDBDB;
+        --btn-text-color: inherit;
       `
     case 'info':
-      return css`
-        background-color: #4DA6B3;
-        color: #ffffff;
+      return `
+        --btn-bg-color: #4DA6B3;
+        --btn-border-color: #4DA6B3;
+        --btn-text-color: #ffffff;
       `
     case 'success':
-      return css`
-        background-color: #5DE290;
-        color: #ffffff;
+      return `
+        --btn-bg-color: #5DE290;
+        --btn-border-color: #5DE290;
+        --btn-text-color: #ffffff;
       `
     case 'danger':
-      return css`
-        background-color: #E34F4F;
-        color: #ffffff;
+      return `
+        --btn-bg-color: #E34F4F;
+        --btn-border-color: #E34F4F;
+        --btn-text-color: #ffffff;
       `
   }
 }
 
 export const Button = styled.button<ButtonStyles>`
+  ${props => handlePadding(props.size, props.isIcon)}
+  ${props => handleSize(props.size, props.isIcon)}
+  ${props => handleToggle(props.toggled)}
+  ${props => handleVariant(props.variant)}
+
   color: inherit;
   background-color: #ffffff;
-  border: 1px solid #DBDBDB;
   border-radius: 17px;
   cursor: pointer;
 
-  ${props => handleButtonIcon(props.isIcon)}
-  ${props => handleSize(props.size)}
-  ${props => handleToggle(props.toggled)}
-  ${props => handleVariant(props.variant)}
+  background-color: var(--btn-bg-color);
+  border: 1px solid var(--btn-border-color);
+  color: var(--btn-text-color);
+
+  border-color: var(--btn-border-color);
+
+  font-size: var(--btn-font-size);
+
+  width: var(--btn-width);
+  min-width: var(--btn-min-width);
+
+  padding: var(--btn-padding);
 
   transition: border-color 0.2s ease;
 

@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import * as S from './index.style';
-import { Button, FormGroup, Icon, Text, Textfield } from '../../atoms';
+import { Button, FormGroup, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
 import { ButtonIcon } from '../../molecules';
 
