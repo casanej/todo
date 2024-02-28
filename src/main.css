@@ -35,6 +35,7 @@ body {
 	background: #555555 0% 0% no-repeat padding-box;
 	color: #848484;
 	font-family: Roboto, sans-serif;
+	font-size: 12px;
 }
 ol, ul {
 	list-style: none;

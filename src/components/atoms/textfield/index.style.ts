@@ -1,14 +1,28 @@
 import styled from "styled-components";
+import { TextfieldStyle } from "./index.types";
 
 const PADDING_HORIZONTAL = 16;
+
+const handleInputSize = (size: TextfieldStyle['size']) => {
+  switch (size) {
+    case 'large':
+      return `
+        padding: 16px ${PADDING_HORIZONTAL}px;
+      `;
+    default:
+      return `
+        padding: 10px ${PADDING_HORIZONTAL}px;
+      `;
+  }
+}
 
 export const Textfield = styled.div`
   width: 100%;
   position: relative;
 `;
 
-export const TextfieldInput = styled.input`
-  padding: 10px ${PADDING_HORIZONTAL}px;
+export const TextfieldInput = styled.input<TextfieldStyle>`
+  ${props => handleInputSize(props.size)}
   border: 1px solid #BDBDBD;
   border-radius: 4px;
   min-width: 150px;

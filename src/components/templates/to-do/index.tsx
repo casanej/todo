@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import * as S from './index.style';
-import { Button, Text, Textfield } from '../../atoms';
+import { Button, FormGroup, Icon, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
+import { ButtonIcon } from '../../molecules';
 
 export const ToDo: FC<ToDoProps> = ({ date }) => {
   const { day, month, year, weekDay } = useMemo(() => {
@@ -18,16 +19,16 @@ export const ToDo: FC<ToDoProps> = ({ date }) => {
     <S.ToDoCalendar>
       <S.ToDoCalendarDate>
         <div>
-          <Text weight='bold' size={3.75}>{day}</Text>
+          <Text weight='bold' size={5}>{day}</Text>
         </div>
         <div>
-          <Text weight='500' size={1.5}>{month}</Text>
-          <Text weight='300' size={1.5}>{year}</Text>
+          <Text weight='500' size={2}>{month}</Text>
+          <Text weight='300' size={2}>{year}</Text>
         </div>
       </S.ToDoCalendarDate>
 
       <div>
-        <Text size={1.5}> {weekDay}</Text>
+        <Text size={2}> {weekDay}</Text>
       </div>
     </S.ToDoCalendar>
     <S.ToDoProgress></S.ToDoProgress>
@@ -44,7 +45,24 @@ export const ToDo: FC<ToDoProps> = ({ date }) => {
         />
       </div>
     </S.ToDoFilter>
-    <S.ToDoList></S.ToDoList>
+
+    <div>
+      <FormGroup>
+        <Textfield
+          placeholder='Add new item'
+          size='large'
+        />
+        <ButtonIcon
+          icon='add'
+          size='large'
+          variant='info'
+        />
+      </FormGroup>
+    </div>
+
+    <S.ToDoList>
+
+    </S.ToDoList>
 
   </S.ToDo >;
 };

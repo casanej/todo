@@ -45,4 +45,5 @@ export const ToDoFilter = styled.div`
 
 export const ToDoList = styled.div`
   height: 280px;
+  overflow-y: auto;
 `;
