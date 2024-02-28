@@ -25,10 +25,15 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+input {
+	box-sizing: border-box;
+}
+
 body {
 	line-height: 1;
 	background: #555555 0% 0% no-repeat padding-box;
-
+	color: #848484;
 	font-family: Roboto, sans-serif;
 }
 ol, ul {
@@ -45,6 +50,14 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
 
 #root {

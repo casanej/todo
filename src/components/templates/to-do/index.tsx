@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import * as S from './index.style';
-import { Text } from '../../atoms';
+import { Button, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
 
 export const ToDo: FC<ToDoProps> = ({ date }) => {
@@ -31,7 +31,19 @@ export const ToDo: FC<ToDoProps> = ({ date }) => {
       </div>
     </S.ToDoCalendar>
     <S.ToDoProgress></S.ToDoProgress>
-    <S.ToDoFilter></S.ToDoFilter>
+    <S.ToDoFilter>
+      <div>
+        <Button>Done</Button>
+        <Button>Pending</Button>
+      </div>
+
+      <div>
+        <Textfield
+          placeholder='Search items'
+          iconSuffix='search'
+        />
+      </div>
+    </S.ToDoFilter>
     <S.ToDoList></S.ToDoList>
 
   </S.ToDo >;
