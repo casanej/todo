@@ -2,9 +2,10 @@ import { FC, useMemo } from 'react';
 import * as S from './index.style';
 import { Button, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
-import { ToDoListAddInput } from '../../organism';
+import { ToDoListAddInput, ToDoListItem } from '../../organism';
+import { ToDoProps } from './index.types';
 
-export const ToDo: FC<ToDoProps> = ({ date, addItem }) => {
+export const ToDo: FC<ToDoProps> = ({ addItem, date, items, updateDescription }) => {
   const { day, month, year, weekDay } = useMemo(() => {
     const currentDate = new Date(date);
     return {
@@ -51,7 +52,11 @@ export const ToDo: FC<ToDoProps> = ({ date, addItem }) => {
     </div>
 
     <S.ToDoList>
-
+      {
+        items.map(item => {
+          return <ToDoListItem key={item.id} item={item} updateDescription={updateDescription} />
+        })
+      }
     </S.ToDoList>
 
   </S.ToDo >;

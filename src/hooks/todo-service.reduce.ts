@@ -1,4 +1,4 @@
-import { ToDoServicePayloadActions } from "../models/todo";
+import { ToDoServiceActions, ToDoServiceActionsAddItem, ToDoServiceActionsEditDescription, ToDoServicePayloadActions } from "../models/todo";
 import { ToDoService } from "../service/to-do.service";
 import { Item } from "../service/to-do.service/models/item"
 
@@ -6,37 +6,31 @@ const todoApi = new ToDoService();
 
 export interface ToDoServiceObject {
   items: Item[];
-  addItem: (payload: ToDoServicePayloadActions['payload']) => void;
+  addItem: (payload: ToDoServiceActionsAddItem['payload']) => void;
+  updateDescription: (payload: ToDoServiceActionsEditDescription['payload']) => void;
 }
 
 export const TODO_DEFAULT_STATE: ToDoServiceObject = {
   items: [],
   addItem: () => { },
+  updateDescription: () => { },
 }
 
 export const todoServiceReducer = (state: ToDoServiceObject, action: ToDoServicePayloadActions): ToDoServiceObject => {
-  switch (action.type) {
-    case 'ADD_ITEM':
-      return {
-        ...state,
-        items: todoApi.addItem(action.payload.description),
-      }
-    /* case 'REMOVE_ITEM':
-      return {
-        ...state,
-        items: todoApi.removeItem(action.payload),
-      }
-    case 'FINISH_ITEM':
-      return {
-        ...state,
-        items: todoApi.finishItem(action.payload),
-      }
-    case 'FILTER_ITEMS':
-      return {
-        ...state,
-        items: todoApi.filterItems(action.payload),
-      } */
-    default:
-      return state;
+  if (action.type === ToDoServiceActions.ADD_ITEM) {
+    return {
+      ...state,
+      items: todoApi.addItem(action.payload.description),
+    }
   }
+
+  if (action.type === ToDoServiceActions.EDIT_DESCRIPTION) {
+    const { id, newDescription } = action.payload;
+    return {
+      ...state,
+      items: todoApi.updateDescription(id, newDescription),
+    }
+  }
+
+  return state;
 }

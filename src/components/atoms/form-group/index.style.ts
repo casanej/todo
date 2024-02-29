@@ -9,19 +9,16 @@ export const FormGroup = styled.div`
   }
 
   input, button {
-    &:first-child {
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
     }
 
-    &:not(:first-child(1)) {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+    &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
 
-    &:last-child {
+    &:not(:first-child):last-child {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }

@@ -1,8 +1,6 @@
 import { Item } from "../../../service/to-do.service/models/item";
 
-export interface ToDoProps {
-  addItem: (description: string) => void;
-  date: string;
-  items: Item[];
+export interface ToDoListItemProps {
+  item: Item;
   updateDescription: (id: string, description: string) => void;
 }

@@ -3,7 +3,7 @@ import * as S from './index.style';
 import { TextfieldProps } from './index.types';
 import { Icon } from '..';
 
-export const Textfield: FC<TextfieldProps> = ({ onChange, placeholder, iconSuffix, size, value }) => {
+export const Textfield: FC<TextfieldProps> = ({ onBlur, onChange, placeholder, iconSuffix, size, value }) => {
 
   const isControlled = useMemo(() => {
     return value ?? false;
@@ -22,10 +22,18 @@ export const Textfield: FC<TextfieldProps> = ({ onChange, placeholder, iconSuffi
     }
   }
 
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (onBlur) {
+      const { value, name } = e.target;
+      onBlur(value, name);
+    }
+  }
+
   return <S.Textfield>
     <S.TextfieldInput
       placeholder={placeholder}
       size={size || 'normal'}
+      onBlur={handleOnBlur}
       onChange={handleChange}
       value={valueController}
     />

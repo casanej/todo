@@ -12,7 +12,7 @@ export class ToDoService {
 
   public addItem(description: string): List['items'] {
     this.list.items.push({
-      id: String(this.list.items.length + 1),
+      id: Date.now().toString(),
       description,
       status: 'PENDING',
     });
@@ -40,7 +40,22 @@ export class ToDoService {
     return this.list.items;
   }
 
-  filterItems(filter: ListFilter): List['items'] {
+  public updateDescription(id: string, newDescription: string): List['items'] {
+    this.list.items = this.list.items.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          description: newDescription,
+        }
+      }
+
+      return item;
+    });
+
+    return this.list.items;
+  }
+
+  public filterItems(filter: ListFilter): List['items'] {
     return this.list.items.filter(item => {
       if (filter.status && item.status !== filter.status) {
         return false;

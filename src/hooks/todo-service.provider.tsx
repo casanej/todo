@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useReducer } from 'react';
 import { TODO_DEFAULT_STATE, ToDoServiceObject, todoServiceReducer } from './todo-service.reduce';
-import { ToDoServiceActionsAddItem, ToDoServiceActionsEnum } from '../models/todo';
+import { ToDoServiceActions } from '../models/todo';
 
 interface ToDoServiceProps {
     children: ReactNode;
@@ -15,6 +15,7 @@ export const ToDoServiceProvider = ({ children }: ToDoServiceProps) => {
 
     return <ToDoServiceContext.Provider value={{
         items: state.items,
-        addItem: (payload: ToDoServiceActionsAddItem['payload']) => dispatch({ type: ToDoServiceActionsEnum.ADD_ITEM, payload }),
+        addItem: (payload) => dispatch({ type: ToDoServiceActions.ADD_ITEM, payload }),
+        updateDescription: (payload) => dispatch({ type: ToDoServiceActions.EDIT_DESCRIPTION, payload }),
     }}>{children as any}</ToDoServiceContext.Provider>;
 };
