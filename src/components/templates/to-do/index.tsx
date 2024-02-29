@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
 import * as S from './index.style';
-import { Button, FormGroup, Text, Textfield } from '../../atoms';
+import { Button, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
-import { ButtonIcon } from '../../molecules';
+import { ToDoListAddInput } from '../../organism';
 
-export const ToDo: FC<ToDoProps> = ({ date }) => {
+export const ToDo: FC<ToDoProps> = ({ date, addItem }) => {
   const { day, month, year, weekDay } = useMemo(() => {
     const currentDate = new Date(date);
     return {
@@ -47,17 +47,7 @@ export const ToDo: FC<ToDoProps> = ({ date }) => {
     </S.ToDoFilter>
 
     <div>
-      <FormGroup>
-        <Textfield
-          placeholder='Add new item'
-          size='large'
-        />
-        <ButtonIcon
-          icon='add'
-          size='large'
-          variant='info'
-        />
-      </FormGroup>
+      <ToDoListAddInput addItem={addItem} />
     </div>
 
     <S.ToDoList>

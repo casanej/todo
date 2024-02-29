@@ -2,7 +2,7 @@ import { FC } from 'react';
 import * as S from './index.style';
 import { ButtonProps } from './index.types';
 
-export const Button: FC<ButtonProps> = ({ children, isIcon, onClick, size, toggled, variant }) => {
+export const Button: FC<ButtonProps> = ({ children, disabled, isIcon, onClick, size, toggled, variant }) => {
 
   return <S.Button
     isIcon={isIcon}
@@ -10,6 +10,7 @@ export const Button: FC<ButtonProps> = ({ children, isIcon, onClick, size, toggl
     size={size || 'normal'}
     toggled={toggled}
     variant={variant || 'primary'}
+    disabled={disabled}
   >
     {toggled && `👍`}
     {children}

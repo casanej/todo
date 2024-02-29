@@ -1,14 +1,25 @@
 import { FC } from 'react';
 import * as S from './index.style';
 import { ToDo } from '../../components/templates/to-do';
+import { ToDoServiceProvider, useToDoService } from '../../hooks/todo-service.provider';
 
-export const MainPage: FC = () => {
+const MainPageWrapped: FC = () => {
+  const { items, addItem } = useToDoService();
+
+  console.log('items', items)
 
   return <S.MainPage>
     <S.MainContainer>
       <ToDo
         date={new Date().toDateString()}
+        addItem={(description) => addItem({ description })}
       />
     </S.MainContainer>
   </S.MainPage>;
+};
+
+export const MainPage: FC = () => {
+  return <ToDoServiceProvider>
+    <MainPageWrapped />
+  </ToDoServiceProvider>;
 };

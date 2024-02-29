@@ -87,6 +87,11 @@ export const Button = styled.button<ButtonStyles>`
 
   transition: border-color 0.2s ease;
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &:hover {
     border-color: #4DA6B3;
     transition: border-color 0.2s ease;

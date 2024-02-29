@@ -14,4 +14,5 @@ export interface ButtonStyles {
   toggled?: boolean;
   isIcon?: boolean;
   variant: ButtonVariants;
+  disabled?: boolean;
 }
