@@ -7,10 +7,10 @@ export const Textfield: FC<TextfieldProps> = ({ onChange, placeholder, iconSuffi
 
   const isControlled = useMemo(() => {
     return value ?? false;
-  }, [value])
+  }, [])
 
-  const controllerValue = useMemo(() => {
-    if (!isControlled) return undefined;
+  const valueController = useMemo(() => {
+    if (isControlled === false) return undefined;
 
     return value || '';
   }, [isControlled, value]);
@@ -27,7 +27,7 @@ export const Textfield: FC<TextfieldProps> = ({ onChange, placeholder, iconSuffi
       placeholder={placeholder}
       size={size || 'normal'}
       onChange={handleChange}
-      value={controllerValue}
+      value={valueController}
     />
 
     {
