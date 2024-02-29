@@ -21,7 +21,6 @@ export class ToDoService {
   }
 
   public removeItem(id: string): List['items'] {
-    console.log('[REMOVENDO ITEM]', id);
     this.list.items = this.list.items.filter(item => item.id !== id);
     return this.list.items;
   }

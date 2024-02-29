@@ -6,6 +6,7 @@ export interface TextfieldProps {
   onChange?: (value: string, name: string) => void;
   onBlur?: (value: string, name: string) => void;
   placeholder?: string;
+  readOnly?: boolean;
   size?: InputSizes;
   value?: string;
 }

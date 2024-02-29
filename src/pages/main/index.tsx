@@ -4,7 +4,7 @@ import { ToDo } from '../../components/templates/to-do';
 import { ToDoServiceProvider, useToDoService } from '../../hooks/todo-service.provider';
 
 const MainPageWrapped: FC = () => {
-  const { items, addItem, removeItem, updateDescription } = useToDoService();
+  const { items, addItem, finishItem, removeItem, updateDescription } = useToDoService();
 
   console.log('items', items)
 
@@ -16,6 +16,7 @@ const MainPageWrapped: FC = () => {
         addItem={(description) => addItem({ description })}
         updateDescription={(id, description) => updateDescription({ id, newDescription: description })}
         removeItem={(id) => removeItem({ id })}
+        finishItem={(id) => finishItem({ id })}
       />
     </S.MainContainer>
   </S.MainPage>;
