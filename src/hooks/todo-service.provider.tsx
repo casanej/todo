@@ -17,5 +17,6 @@ export const ToDoServiceProvider = ({ children }: ToDoServiceProps) => {
         items: state.items,
         addItem: (payload) => dispatch({ type: ToDoServiceActions.ADD_ITEM, payload }),
         updateDescription: (payload) => dispatch({ type: ToDoServiceActions.EDIT_DESCRIPTION, payload }),
+        removeItem: (payload) => dispatch({ type: ToDoServiceActions.REMOVE_ITEM, payload }),
     }}>{children as any}</ToDoServiceContext.Provider>;
 };

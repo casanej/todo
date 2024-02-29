@@ -5,7 +5,7 @@ import { monthName, weekDayName } from '../../../constants/date';
 import { ToDoListAddInput, ToDoListItem } from '../../organism';
 import { ToDoProps } from './index.types';
 
-export const ToDo: FC<ToDoProps> = ({ addItem, date, items, updateDescription }) => {
+export const ToDo: FC<ToDoProps> = ({ addItem, date, items, removeItem, updateDescription }) => {
   const { day, month, year, weekDay } = useMemo(() => {
     const currentDate = new Date(date);
     return {
@@ -54,7 +54,7 @@ export const ToDo: FC<ToDoProps> = ({ addItem, date, items, updateDescription })
     <S.ToDoList>
       {
         items.map(item => {
-          return <ToDoListItem key={item.id} item={item} updateDescription={updateDescription} />
+          return <ToDoListItem key={item.id} item={item} updateDescription={updateDescription} removeItem={removeItem} />
         })
       }
     </S.ToDoList>
