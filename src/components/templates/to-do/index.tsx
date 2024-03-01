@@ -1,12 +1,12 @@
 import { FC, memo, useMemo } from 'react';
 import * as S from './index.style';
-import { Button, Text, Textfield } from '../../atoms';
+import { Button, ProgressBar, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
 import { ToDoListAddInput, ToDoListItem } from '../../organism';
 import { ToDoProps } from './index.types';
 import { ItemStatus } from '../../../service/to-do.service/models/item';
 
-export const ToDo: FC<ToDoProps> = memo(({ addItem, date, filterOptions, finishItem, items, removeItem, updateDescription, updateFilterDescription, updateFilterStatus }) => {
+export const ToDo: FC<ToDoProps> = memo(({ addItem, date, filterOptions, finishItem, items, progress, removeItem, updateDescription, updateFilterDescription, updateFilterStatus }) => {
   const { day, month, year, weekDay } = useMemo(() => {
     const currentDate = new Date(date);
     return {
@@ -18,11 +18,7 @@ export const ToDo: FC<ToDoProps> = memo(({ addItem, date, filterOptions, finishI
   }, [date]);
 
   const handleFilterStatus = (status: ItemStatus) => {
-    if (filterOptions.byStatus === status) {
-      updateFilterStatus('ALL');
-    } else {
-      updateFilterStatus(status);
-    }
+    updateFilterStatus(filterOptions.byStatus === status ? 'ALL' : status);
   }
 
   const handleClearFilter = () => {
@@ -63,7 +59,14 @@ export const ToDo: FC<ToDoProps> = memo(({ addItem, date, filterOptions, finishI
         <Text size={2}> {weekDay}</Text>
       </div>
     </S.ToDoCalendar>
-    <S.ToDoProgress></S.ToDoProgress>
+
+    <div>
+      <ProgressBar
+        max={progress.total}
+        value={progress.done}
+      />
+    </div>
+
     <S.ToDoFilter>
       <div>
         <Button toggled={filterOptions.byStatus === 'DONE'} onClick={() => handleFilterStatus('DONE')} >Done</Button>

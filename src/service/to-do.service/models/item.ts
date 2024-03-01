@@ -10,3 +10,8 @@ export interface Item {
   description: string;
   status: ItemStatus;
 }
+
+export interface Progress {
+  total: number;
+  done: number;
+}

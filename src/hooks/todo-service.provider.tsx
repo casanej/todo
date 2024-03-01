@@ -18,6 +18,7 @@ export const ToDoServiceProvider = ({ children }: ToDoServiceProps) => {
         filterOptions: state.filterOptions,
         addItem: (payload) => dispatch({ type: ToDoServiceActions.ADD_ITEM, payload }),
         updateDescription: (payload) => dispatch({ type: ToDoServiceActions.EDIT_DESCRIPTION, payload }),
+        progress: state.progress,
         removeItem: (payload) => dispatch({ type: ToDoServiceActions.REMOVE_ITEM, payload }),
         finishItem: (payload) => dispatch({ type: ToDoServiceActions.FINISH_ITEM, payload }),
         updateFilterStatus: (payload) => dispatch({ type: ToDoServiceActions.UPDATE_FILTER_STATUS, payload }),

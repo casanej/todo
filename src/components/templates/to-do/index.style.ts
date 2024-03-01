@@ -20,9 +20,6 @@ export const ToDoCalendarDate = styled.div`
   justify-content: space-between;
 `;
 
-export const ToDoProgress = styled.div`
-`;
-
 export const ToDoFilter = styled.div`
   display: flex;
   flex-direction: row;
@@ -44,6 +41,9 @@ export const ToDoFilter = styled.div`
 `;
 
 export const ToDoList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   height: 280px;
   overflow-y: auto;
 `;
