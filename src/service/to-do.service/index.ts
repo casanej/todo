@@ -1,31 +1,44 @@
-import { ListFilter } from "./models/filter";
-import { List } from "./models/list";
+import { FilterOptions } from "./models/filter";
+import { List, Progress } from "./models/list";
 
 export class ToDoService {
   private list: List = {
     items: [],
   };
 
-  public getList(): List {
-    return this.list;
+  public getItems(filterOptions?: FilterOptions): List['items'] {
+    if (!filterOptions) return this.list.items;
+
+    let currList = this.list.items;
+    const { byStatus, byDescription } = filterOptions;
+
+    if (byStatus && byStatus !== 'ALL') {
+      currList = currList.filter(item => item.status === byStatus);
+    }
+
+    if (byDescription) {
+      currList = currList.filter(item => item.description.includes(byDescription));
+    }
+
+    return currList;
   }
 
-  public addItem(description: string): List['items'] {
+  public addItem(description: string): ToDoService {
     this.list.items.push({
       id: Date.now().toString(),
       description,
       status: 'PENDING',
     });
 
-    return this.list.items;
+    return this;
   }
 
-  public removeItem(id: string): List['items'] {
+  public removeItem(id: string): ToDoService {
     this.list.items = this.list.items.filter(item => item.id !== id);
-    return this.list.items;
+    return this;
   }
 
-  public finishItem(id: string): List['items'] {
+  public finishItem(id: string): ToDoService {
     this.list.items = this.list.items.map(item => {
       if (item.id === id) {
         return {
@@ -37,10 +50,10 @@ export class ToDoService {
       return item;
     });
 
-    return this.list.items;
+    return this;
   }
 
-  public updateDescription(id: string, newDescription: string): List['items'] {
+  public updateDescription(id: string, newDescription: string): ToDoService {
     this.list.items = this.list.items.map(item => {
       if (item.id === id) {
         return {
@@ -52,20 +65,17 @@ export class ToDoService {
       return item;
     });
 
-    return this.list.items;
+    return this;
   }
 
-  public filterItems(filter: ListFilter): List['items'] {
-    return this.list.items.filter(item => {
-      if (filter.status && item.status !== filter.status) {
-        return false;
-      }
+  public getProgress(): Progress {
+    const total = this.list.items.length;
+    const done = this.list.items.filter(item => item.status === 'DONE').length;
 
-      if (filter.description && !item.description.includes(filter.description)) {
-        return false;
-      }
-
-      return true;
-    });
+    return {
+      done,
+      total,
+      percentage: done / total,
+    };
   }
 }

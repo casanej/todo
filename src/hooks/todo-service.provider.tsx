@@ -15,9 +15,12 @@ export const ToDoServiceProvider = ({ children }: ToDoServiceProps) => {
 
     return <ToDoServiceContext.Provider value={{
         items: state.items,
+        filterOptions: state.filterOptions,
         addItem: (payload) => dispatch({ type: ToDoServiceActions.ADD_ITEM, payload }),
         updateDescription: (payload) => dispatch({ type: ToDoServiceActions.EDIT_DESCRIPTION, payload }),
         removeItem: (payload) => dispatch({ type: ToDoServiceActions.REMOVE_ITEM, payload }),
         finishItem: (payload) => dispatch({ type: ToDoServiceActions.FINISH_ITEM, payload }),
+        updateFilterStatus: (payload) => dispatch({ type: ToDoServiceActions.UPDATE_FILTER_STATUS, payload }),
+        updateFilterDescription: (payload) => dispatch({ type: ToDoServiceActions.UPDATE_FILTER_DESCRIPTION, payload }),
     }}>{children as any}</ToDoServiceContext.Provider>;
 };

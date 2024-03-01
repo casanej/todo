@@ -47,3 +47,10 @@ export const ToDoList = styled.div`
   height: 280px;
   overflow-y: auto;
 `;
+
+export const WarningMessageList = styled.div`
+  label {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;

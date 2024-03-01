@@ -1,11 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import * as S from './index.style';
 import { Button, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
 import { ToDoListAddInput, ToDoListItem } from '../../organism';
 import { ToDoProps } from './index.types';
+import { ItemStatus } from '../../../service/to-do.service/models/item';
 
-export const ToDo: FC<ToDoProps> = ({ addItem, date, finishItem, items, removeItem, updateDescription }) => {
+export const ToDo: FC<ToDoProps> = memo(({ addItem, date, filterOptions, finishItem, items, removeItem, updateDescription, updateFilterDescription, updateFilterStatus }) => {
   const { day, month, year, weekDay } = useMemo(() => {
     const currentDate = new Date(date);
     return {
@@ -15,6 +16,36 @@ export const ToDo: FC<ToDoProps> = ({ addItem, date, finishItem, items, removeIt
       weekDay: weekDayName[currentDate.getDay()],
     }
   }, [date]);
+
+  const handleFilterStatus = (status: ItemStatus) => {
+    if (filterOptions.byStatus === status) {
+      updateFilterStatus('ALL');
+    } else {
+      updateFilterStatus(status);
+    }
+  }
+
+  const handleClearFilter = () => {
+    updateFilterStatus('ALL');
+    updateFilterDescription('');
+  }
+
+  const renderItems = useMemo(() => {
+    const hasFilter = filterOptions.byStatus !== 'ALL' || filterOptions.byDescription !== '';
+
+    if (!hasFilter && items.length === 0) return <S.WarningMessageList>There are no tasks to show. Try adding some</S.WarningMessageList>
+    if (hasFilter && items.length === 0) return <S.WarningMessageList>There are no tasks with the chosen filter. <label onClick={handleClearFilter}>Clear the filter here</label> to see all items.</S.WarningMessageList>
+
+    return items.map(item => {
+      return <ToDoListItem
+        key={item.id}
+        item={item}
+        finishItem={finishItem}
+        removeItem={removeItem}
+        updateDescription={updateDescription}
+      />
+    })
+  }, [JSON.stringify(items), filterOptions.byStatus, filterOptions.byDescription]);
 
   return <S.ToDo>
     <S.ToDoCalendar>
@@ -35,14 +66,16 @@ export const ToDo: FC<ToDoProps> = ({ addItem, date, finishItem, items, removeIt
     <S.ToDoProgress></S.ToDoProgress>
     <S.ToDoFilter>
       <div>
-        <Button>Done</Button>
-        <Button>Pending</Button>
+        <Button toggled={filterOptions.byStatus === 'DONE'} onClick={() => handleFilterStatus('DONE')} >Done</Button>
+        <Button toggled={filterOptions.byStatus === 'PENDING'} onClick={() => handleFilterStatus('PENDING')}>Pending</Button>
       </div>
 
       <div>
         <Textfield
           placeholder='Search items'
           iconSuffix='search'
+          value={filterOptions.byDescription}
+          onChange={value => updateFilterDescription(value)}
         />
       </div>
     </S.ToDoFilter>
@@ -52,18 +85,8 @@ export const ToDo: FC<ToDoProps> = ({ addItem, date, finishItem, items, removeIt
     </div>
 
     <S.ToDoList>
-      {
-        items.map(item => {
-          return <ToDoListItem
-            key={item.id}
-            item={item}
-            finishItem={finishItem}
-            removeItem={removeItem}
-            updateDescription={updateDescription}
-          />
-        })
-      }
+      {renderItems}
     </S.ToDoList>
 
   </S.ToDo >;
-};
+});

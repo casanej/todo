@@ -1,6 +1,8 @@
 import { ItemStatus } from "./item";
 
-export interface ListFilter {
-  status?: ItemStatus;
-  description?: string;
+export type ItemStatusFilter = ItemStatus | 'ALL';
+
+export interface FilterOptions {
+  byStatus?: ItemStatusFilter;
+  byDescription?: string;
 }
