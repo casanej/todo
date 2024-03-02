@@ -3,7 +3,7 @@ import * as S from './index.style';
 import { TextfieldProps } from './index.types';
 import { Icon } from '..';
 
-export const Textfield: FC<TextfieldProps> = ({ iconSuffix, onBlur, onChange, onFocus, placeholder, readOnly, size, value }) => {
+export const Textfield: FC<TextfieldProps> = ({ iconSuffix, onBlur, onChange, onFocus, placeholder, popover, readOnly, size, value }) => {
 
   const isControlled = useMemo(() => {
     return value ?? false;
@@ -29,7 +29,16 @@ export const Textfield: FC<TextfieldProps> = ({ iconSuffix, onBlur, onChange, on
     }
   }
 
-  return <S.Textfield>
+  const renderPopover = useMemo(() => {
+    if (!popover) return null;
+    return {
+      'data-toggle': popover,
+      'data-trigger': 'hover',
+      title: popover
+    }
+  }, [popover]);
+
+  return <S.Textfield {...renderPopover}>
     <S.TextfieldInput
       readOnly={readOnly}
       placeholder={placeholder}

@@ -10,6 +10,7 @@ export interface TextfieldProps {
   readOnly?: boolean;
   size?: InputSizes;
   value?: string;
+  popover?: string;
 }
 
 export interface TextfieldStyle {

@@ -6,10 +6,20 @@ export const ProgressContainer = styled.div`
 
 export const ProgressBar = styled.progress`
   appearance: none;
+  -webkit-appearance: none;
 
   width: 100%;
   height: 2em;
   border-radius: inherit;
+
+  &::-moz-progress-bar {
+    background-color: #5DE290;
+
+  }
+
+  ::-webkit-progress-value {
+    transition: width 0.5s;
+  }
 
   &[value]::-webkit-progress-bar {
     background-color: #E4E4E4;

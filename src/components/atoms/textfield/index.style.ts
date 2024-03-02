@@ -35,7 +35,7 @@ export const TextfieldInput = styled.input<TextfieldStyle>`
     }
 
     &:focus, &:active {
-      outline: #4DA6B3 auto 10px;
+      outline: #4DA6B3 auto 1px;
     }
   }
 

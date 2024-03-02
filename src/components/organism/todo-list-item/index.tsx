@@ -20,6 +20,7 @@ export const ToDoListItem = ({ finishItem, item, removeItem, updateDescription }
       onBlur={handleUpdateDescription}
       onChange={description => setDescription(description)}
       onFocus={() => setIsEditing(true)}
+      popover="Edit task"
     />
     {
       item.status !== 'DONE' && isEditing && <>
