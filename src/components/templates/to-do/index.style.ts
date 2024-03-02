@@ -38,6 +38,18 @@ export const ToDoFilter = styled.div`
       flex: 1;
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 10px;
+
+    > div {
+      &:nth-child(2) {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const ToDoList = styled.div`

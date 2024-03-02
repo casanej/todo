@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import * as S from './index.style';
 import { ButtonProps } from './index.types';
+import { Icon } from '..';
 
 export const Button: FC<ButtonProps> = ({ children, disabled, isIcon, onClick, size, toggled, variant }) => {
 
@@ -12,7 +13,7 @@ export const Button: FC<ButtonProps> = ({ children, disabled, isIcon, onClick, s
     variant={variant || 'primary'}
     disabled={disabled}
   >
-    {toggled && `👍`}
+    {toggled && <Icon type='check' />}
     {children}
   </S.Button>;
 };

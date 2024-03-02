@@ -61,9 +61,26 @@ const handleVariant = (variant: ButtonStyles['variant']) => {
   }
 }
 
+const handleIcon = (isIcon: boolean = false) => {
+  if (isIcon) return `
+    justify-content: center;
+    align-items: center;
+  `;
+
+  return `
+    align-items: center;
+    gap: 6px;
+
+    span {
+      font-size: calc(var(--btn-font-size));
+    }
+  `
+}
+
 export const Button = styled.button<ButtonStyles>`
   ${props => handlePadding(props.size, props.isIcon)}
   ${props => handleSize(props.size, props.isIcon)}
+  ${props => handleIcon(props.isIcon)}
   ${props => handleToggle(props.toggled)}
   ${props => handleVariant(props.variant)}
 
@@ -86,6 +103,9 @@ export const Button = styled.button<ButtonStyles>`
   padding: var(--btn-padding);
 
   transition: border-color 0.2s ease;
+
+  display: flex;
+  flex-direction: row;
 
   &:disabled {
     opacity: 0.5;
