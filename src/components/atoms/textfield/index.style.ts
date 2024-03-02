@@ -29,13 +29,20 @@ export const TextfieldInput = styled.input<TextfieldStyle>`
   width: 100%;
   color: inherit;
 
-  &:hover {
-    border-color: #4DA6B3;
+  &:not(:read-only) {
+    &:hover {
+      border-color: #4DA6B3;
+    }
+
+    &:focus, &:active {
+      outline: #4DA6B3 auto 10px;
+    }
   }
 
-  &:focus, &:active {
-    outline: #4DA6B3 auto 10px;
+  &:read-only {
+    outline: none;
   }
+
 `;
 
 export const TextfieldIconSuffix = styled.div`

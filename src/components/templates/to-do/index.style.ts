@@ -58,6 +58,24 @@ export const ToDoList = styled.div`
   gap: 8px;
   height: 280px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #E4E4E4;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #848484;
+    border-radius: 10px;
+
+    &:hover {
+      background: #797979;
+    }
+  }
 `;
 
 export const WarningMessageList = styled.div`

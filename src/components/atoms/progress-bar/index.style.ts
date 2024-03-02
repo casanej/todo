@@ -17,6 +17,7 @@ export const ProgressBar = styled.progress`
 
   &[value]::-webkit-progress-value {
     background-color: #5DE290;
+    transition: width 0.5s;
   }
 `;
 
