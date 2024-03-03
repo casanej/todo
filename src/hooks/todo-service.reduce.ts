@@ -38,7 +38,10 @@ export const TODO_DEFAULT_STATE: ToDoServiceObject = {
 export const todoServiceReducer = (state: ToDoServiceObject, action: ToDoServicePayloadActions): ToDoServiceObject => {
   if (action.type === ToDoServiceActions.ADD_ITEM) {
 
-    const items = todoApi.addItem(action.payload.description).getItems();
+    const items = todoApi.addItem(action.payload.description).getItems({
+      byDescription: state.filterOptions.byDescription,
+      byStatus: state.filterOptions.byStatus,
+    });
     const progress = todoApi.getProgress();
 
     return {
@@ -52,14 +55,20 @@ export const todoServiceReducer = (state: ToDoServiceObject, action: ToDoService
     const { id, newDescription } = action.payload;
     return {
       ...state,
-      items: todoApi.updateDescription(id, newDescription).getItems(),
+      items: todoApi.updateDescription(id, newDescription).getItems({
+        byDescription: state.filterOptions.byDescription,
+        byStatus: state.filterOptions.byStatus,
+      }),
     }
   }
 
   if (action.type === ToDoServiceActions.REMOVE_ITEM) {
     const { id } = action.payload;
 
-    const items = todoApi.removeItem(id).getItems();
+    const items = todoApi.removeItem(id).getItems({
+      byDescription: state.filterOptions.byDescription,
+      byStatus: state.filterOptions.byStatus,
+    });
     const progress = todoApi.getProgress();
 
     return {
@@ -72,7 +81,10 @@ export const todoServiceReducer = (state: ToDoServiceObject, action: ToDoService
   if (action.type === ToDoServiceActions.FINISH_ITEM) {
     const { id } = action.payload;
 
-    const items = todoApi.finishItem(id).getItems();
+    const items = todoApi.finishItem(id).getItems({
+      byDescription: state.filterOptions.byDescription,
+      byStatus: state.filterOptions.byStatus,
+    });
     const progress = todoApi.getProgress();
 
     return {
