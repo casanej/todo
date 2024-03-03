@@ -10,6 +10,7 @@ export const ToDo = styled.div`
   padding: 60px;
 
   @media (max-width: 768px){
+    padding: 16px;
     width: clamp(365px, calc(100vw - 16px), 800px);
     height: clamp(650px , 100svh, calc(100vh - 100px));
   }
