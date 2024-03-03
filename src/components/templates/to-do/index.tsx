@@ -10,7 +10,7 @@ export const ToDo: FC<ToDoProps> = memo(({ addItem, date, filterOptions, finishI
   const { day, month, year, weekDay } = useMemo(() => {
     const currentDate = new Date(date);
     return {
-      day: currentDate.getDate(),
+      day: currentDate.getDate().toString().padStart(2, '0'),
       month: monthName[currentDate.getMonth()],
       year: currentDate.getFullYear(),
       weekDay: weekDayName[currentDate.getDay()],

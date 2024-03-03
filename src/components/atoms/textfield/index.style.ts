@@ -41,6 +41,7 @@ export const TextfieldInput = styled.input<TextfieldStyle>`
 
   &:read-only {
     outline: none;
+    background-color: #F4F4F4;
   }
 
 `;

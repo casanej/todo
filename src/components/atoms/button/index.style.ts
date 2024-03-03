@@ -28,6 +28,7 @@ const handleToggle = (toggled: boolean = false) => {
     return `
       --btn-border-color: #4DA6B3;
       --btn-text-color: #4DA6B3;
+      --btn-bg-color: #F7F7F8;
     `
   }
 }
@@ -81,8 +82,8 @@ export const Button = styled.button<ButtonStyles>`
   ${props => handlePadding(props.size, props.isIcon)}
   ${props => handleSize(props.size, props.isIcon)}
   ${props => handleIcon(props.isIcon)}
-  ${props => handleToggle(props.toggled)}
   ${props => handleVariant(props.variant)}
+  ${props => handleToggle(props.toggled)}
 
   color: inherit;
   background-color: #ffffff;

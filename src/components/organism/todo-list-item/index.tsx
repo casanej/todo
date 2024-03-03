@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { FormGroup, Textfield } from "../../atoms";
 import { ButtonIcon } from "../../molecules";
 import { ToDoListItemProps } from "./index.types";
@@ -12,18 +12,28 @@ export const ToDoListItem = ({ finishItem, item, removeItem, updateDescription }
     setTimeout(() => setIsEditing(false), 200);
   }, [description]);
 
+  const canEdit = useMemo(() => {
+    return item.status !== 'DONE' && isEditing;
+  }, [item.status, isEditing])
+
+  const popoverMessage = useMemo(() => {
+    if (item.status === 'DONE') return 'Task is done'
+
+    return 'Edit task'
+  }, [item.status]);
+
   return <FormGroup>
     <Textfield
       size='large'
-      readOnly={item.status === 'DONE'}
+      readOnly={!canEdit}
       value={description}
       onBlur={handleUpdateDescription}
       onChange={description => setDescription(description)}
       onFocus={() => setIsEditing(true)}
-      popover="Edit task"
+      popover={popoverMessage}
     />
     {
-      item.status !== 'DONE' && isEditing && <>
+      canEdit && <>
         <ButtonIcon icon='remove' size='large' variant='danger' onClick={() => removeItem(item.id)} />
         <ButtonIcon icon='check' size='large' variant='success' onClick={() => finishItem(item.id)} />
       </>
