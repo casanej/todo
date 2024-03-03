@@ -4,6 +4,15 @@ export const ToDo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  width: 800px;
+  height: 650px;
+  padding: 60px;
+
+  @media (max-width: 768px){
+    width: clamp(365px, calc(100vw - 16px), 800px);
+    height: clamp(650px , 100svh, calc(100vh - 100px));
+  }
 `;
 
 export const ToDoCalendar = styled.div`
@@ -56,7 +65,7 @@ export const ToDoList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 280px;
+  height: 72svh;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
