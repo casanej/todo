@@ -3,7 +3,7 @@ import * as S from './index.style';
 import { TextfieldProps } from './index.types';
 import { Icon } from '..';
 
-export const Textfield: FC<TextfieldProps> = ({ iconSuffix, onBlur, onChange, onFocus, placeholder, popover, readOnly, size, value }) => {
+export const Textfield: FC<TextfieldProps> = ({ iconSuffix, onBlur, onChange, onFocus, onKeyDown, placeholder, popover, readOnly, size, value }) => {
 
   const isControlled = useMemo(() => {
     return value ?? false;
@@ -47,6 +47,7 @@ export const Textfield: FC<TextfieldProps> = ({ iconSuffix, onBlur, onChange, on
       onChange={handleChange}
       onFocus={onFocus}
       value={valueController}
+      onKeyDown={onKeyDown}
     />
 
     {

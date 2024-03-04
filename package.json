@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "wrap": "yarn install --production && yarn build && yarn preview"
+    "wrap": "yarn install && yarn build && yarn preview"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",

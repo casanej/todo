@@ -1,5 +1,6 @@
 import { FilterOptions } from "./models/filter";
-import { List, Progress } from "./models/list";
+import { Progress } from "./models/item";
+import { List } from "./models/list";
 
 export class ToDoService {
   private list: List = {
@@ -75,7 +76,6 @@ export class ToDoService {
     return {
       done,
       total,
-      percentage: done / total,
     };
   }
 }
