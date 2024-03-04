@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import * as S from './index.style';
 import { Button, ProgressBar, Text, Textfield } from '../../atoms';
 import { monthName, weekDayName } from '../../../constants/date';
